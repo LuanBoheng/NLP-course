@@ -45,3 +45,9 @@ by the end all corpus in simplified Chinese are in the folder **wiki_chs**
 
 
 following folders should be included in the **.gitignore**
+
+* **big_files**
+
+* **wiki_ch**
+
+* **wiki_chs**
