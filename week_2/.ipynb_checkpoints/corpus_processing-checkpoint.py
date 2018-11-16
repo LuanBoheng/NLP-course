@@ -27,16 +27,15 @@ def replace_nums(string):
     
 # modified tokenize function remove stop words
 def tokenize_string(string):
+    global gram_level
     clauses = [jieba.cut(c) for c in re.findall('[\w|\d]+', string)]
     tokens = [replace_nums(w) for c in clauses for w in list(c) if w not in stop_words]
+    if gram_level == 'char': # do char counting
+        tokens = ''.join(tokens)
     return tokens
     
 def count_ngram(string, n):
-    global gram_level
     tokens = tokenize_string(string)
-    if gram_level == 'char': # do char counting
-        tokens = ''.join(tokens)
-    
     ngrams = [tuple(tokens[i-n:i]) for i in range(len(tokens)) if i > n]
     return Counter(ngrams)
 
