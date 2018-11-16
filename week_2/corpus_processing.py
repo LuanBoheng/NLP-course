@@ -16,10 +16,19 @@ import re
 import jieba
 from collections import Counter
 from functools import partial, reduce
+stop_words = ['的', '在', '是', 'doc', '为', '和', '了', 'zh', 'id', 'org', 'https', 'wiki', 'wikipedia', 
+              'title', 'url', 'curid', '与', '于', '中', '被', '也', '一个', '后', '并', '而', '以', '由', 
+              '及', '但', '将', '时', '其', '到', '对', '位于', '至', '会', '或', '可以', '之', '该', '则', 
+              '从', '这', '以及', '其中', '所', '就', '个', '曾', '又', '亦', '可', '它', '地', '来']
+stop_words = set(stop_words)
 
+def replace_nums(string):
+    return '<num>' if string.isnumeric() else string
+    
+# modified tokenize function remove stop words
 def tokenize_string(string):
     clauses = [jieba.cut(c) for c in re.findall('[\w|\d]+', string)]
-    tokens = [w for c in clauses for w in list(c)]
+    tokens = [replace_nums(w) for c in clauses for w in list(c) if w not in stop_words]
     return tokens
     
 def count_ngram(string, n):
@@ -42,7 +51,9 @@ def multiprocess_count_ngram(batch_file, N):
     ngram_counts = pool.map(target_func, batch_file)
     pool.close()
     pool.join()
-    return reduce(lambda x, y : x + y, ngram_counts)
+    result = reduce(lambda x, y : x + y, ngram_counts)
+    result = Counter({k:v for k,v in result.items() if v > 1}) #saving memory
+    return result
 
 #------------------------------------------------------------------------------
 
@@ -61,6 +72,36 @@ def wikichs_count_ngram(N, batch_size=16):
     return word_count
 
 #------------------------------------------------------------------------------
-if __name__ == '__main__':
-    word_count = wikichs_count_ngram(2)
+
+import pickle
+
+def save_obj(obj, file_name):
+    pickle.dump(obj, open(file_name, 'wb'))
     
+def load_obj(file_name):
+    obj = pickle.load(open(file_name, 'rb'))
+    return obj
+
+
+#------------------------------------------------------------------------------
+if __name__ == '__main__':
+    '''
+    DEBUG
+    INFO
+    WARNING
+    ERROR
+    CRITICAL
+    '''
+    
+    import logging
+    jieba.setLogLevel(logging.WARNING)
+    
+    def save_ngram(n):
+        print('count_ngram', n)
+        count_ngram = wikichs_count_ngram(n)
+        count_ngram = Counter({k:v for k,v in count_ngram.items() if v > 10})
+        save_obj(count_ngram, 'count_ngram'+str(n))
+    
+    save_ngram(1)
+    save_ngram(2)
+
