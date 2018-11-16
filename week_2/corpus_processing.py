@@ -32,7 +32,11 @@ def tokenize_string(string):
     return tokens
     
 def count_ngram(string, n):
+    global gram_level
     tokens = tokenize_string(string)
+    if gram_level == 'char': # do char counting
+        tokens = ''.join(tokens)
+    
     ngrams = [tuple(tokens[i-n:i]) for i in range(len(tokens)) if i > n]
     return Counter(ngrams)
 
@@ -97,11 +101,17 @@ if __name__ == '__main__':
     jieba.setLogLevel(logging.WARNING)
     
     def save_ngram(n):
-        print('count_ngram', n)
+        global gram_level
+        print('count_ngram', n, gram_level)
         count_ngram = wikichs_count_ngram(n)
         count_ngram = Counter({k:v for k,v in count_ngram.items() if v > 10})
-        save_obj(count_ngram, 'count_ngram'+str(n))
+        save_obj(count_ngram, 'count_ngram'+str(n) + gram_level)
     
+    gram_level = 'char'
+    save_ngram(1)
+    save_ngram(2)
+    
+    gram_level = 'word'
     save_ngram(1)
     save_ngram(2)
 
