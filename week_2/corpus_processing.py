@@ -1,3 +1,4 @@
+# usd BFS search, return all corpus files as a list of string
 import os
 def get_corpus():
     corpus_path = '../wiki_corpus/wiki_chs'
@@ -12,6 +13,7 @@ def get_corpus():
     return corpus_list
 
 #------------------------------------------------------------------------------
+# corpus processing functions
 import re
 import jieba
 from collections import Counter
@@ -27,17 +29,20 @@ def replace_nums(string):
     
 # modified tokenize function remove stop words
 def tokenize_string(string):
-    global gram_level
+    global gram_level # this could be changed outside
     clauses = [jieba.cut(c) for c in re.findall('[\w|\d]+', string)]
     tokens = [replace_nums(w) for c in clauses for w in list(c) if w not in stop_words]
     if gram_level == 'char': # do char counting
         tokens = ''.join(tokens)
     return tokens
+
+def get_ngram(string, n):
+    tokens = tokenize_string(string)
+    ngrams = [tuple(tokens[i-n:i]) for i in range(len(tokens)+1) if i >= n]
+    return ngrams
     
 def count_ngram(string, n):
-    tokens = tokenize_string(string)
-    ngrams = [tuple(tokens[i-n:i]) for i in range(len(tokens)) if i > n]
-    return Counter(ngrams)
+    return Counter(get_ngram(string, n))
 
 
 def process_file(input_file, process_func):
@@ -45,7 +50,7 @@ def process_file(input_file, process_func):
         return process_func(f.read())
 
 #------------------------------------------------------------------------------
-
+#Multicore map reduce
 import time
 import multiprocessing
 def multiprocess_count_ngram(batch_file, N):
@@ -59,7 +64,7 @@ def multiprocess_count_ngram(batch_file, N):
     return result
 
 #------------------------------------------------------------------------------
-
+# cut whole task in to chunck
 from tqdm import tqdm
 
 def cut_list(data, batch_size):
@@ -75,7 +80,7 @@ def wikichs_count_ngram(N, batch_size=16):
     return word_count
 
 #------------------------------------------------------------------------------
-
+# save the results on distk
 import pickle
 
 def save_obj(obj, file_name):
@@ -103,8 +108,8 @@ if __name__ == '__main__':
         global gram_level
         print('count_ngram', n, gram_level)
         count_ngram = wikichs_count_ngram(n)
-        count_ngram = Counter({k:v for k,v in count_ngram.items() if v > 10})
-        save_obj(count_ngram, 'count_ngram'+str(n) + gram_level)
+        count_ngram = Counter({k:v for k,v in count_ngram.items() if v > 10}) #save memory
+        save_obj(count_ngram, 'data/count_ngram'+str(n) + gram_level)
     
     gram_level = 'char'
     save_ngram(1)
