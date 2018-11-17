@@ -35,11 +35,14 @@ def tokenize_string(string):
     if gram_level == 'char': # do char counting
         tokens = ''.join(tokens)
     return tokens
+
+def get_ngram(string, n):
+    tokens = tokenize_string(string)
+    ngrams = [tuple(tokens[i-n:i]) for i in range(len(tokens)+1) if i >= n]
+    return ngrams
     
 def count_ngram(string, n):
-    tokens = tokenize_string(string)
-    ngrams = [tuple(tokens[i-n:i]) for i in range(len(tokens)) if i > n]
-    return Counter(ngrams)
+    return Counter(get_ngram(string, n))
 
 
 def process_file(input_file, process_func):
@@ -105,7 +108,7 @@ if __name__ == '__main__':
         global gram_level
         print('count_ngram', n, gram_level)
         count_ngram = wikichs_count_ngram(n)
-        count_ngram = Counter({k:v for k,v in count_ngram.items() if v > 10})
+        count_ngram = Counter({k:v for k,v in count_ngram.items() if v > 10}) #save memory
         save_obj(count_ngram, 'data/count_ngram'+str(n) + gram_level)
     
     gram_level = 'char'
