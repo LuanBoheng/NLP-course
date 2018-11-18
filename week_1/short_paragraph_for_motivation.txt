@@ -1,0 +1,27 @@
+Writing a short paragraph explain:
+3.1. what do you want to acquire in this;
+
+During this period of study, I would like to gain the vision of AI industry, specifically in NLP (which interests me a lot).  Meanwhile, I want to practice my programming skills via relate application implementation.
+
+3.2. what problem do you want to solve;
+
+What kinds of problems that is suitable for AI technics?
+How to form a real world problem into AI models?
+How to design and implement these models?
+How to optimise these models?
+
+3.3. what’s the advantages you have to finish you goal;
+
+A little bit background knowledge and theorem related with AI and math.
+
+3.4. what’s the disadvantages you have to finish you goal; 
+
+Have no experience about designing and implementing industrial AI solutions.
+
+3.5. How will you reduce the impact of your disadvantages; 
+
+Pay more attention to the application scenarios and the design patten of AI. practice via programming. 
+
+3.6. How will you plan to study in this course period?
+
+Following the step of related courses, try to make assignments real projects rather than toys.
