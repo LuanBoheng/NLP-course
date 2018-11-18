@@ -1,18 +1,25 @@
 import time
+
+is_debug = True
+
 def debug_print(func):
     def wrapper(*args,**kwargs):
+        global is_debug
         func_name = func.__qualname__
         output = func(*args,**kwargs)
-        print(func_name,(args,kwargs),'=>',output)
+        if is_debug:
+            print(func_name,(args,kwargs),'=>',output)
         return output
     return wrapper
 
 def timer(func):
     def wrapper(*args,**kwargs):
+        global is_debug
         start_time = time.time()
         output = func(*args,**kwargs)
         running_time = time.time() - start_time
-        print('total_time:',running_time,'s')
+        if is_debug:
+            print('total_time:',running_time,'s')
         return output
     return wrapper
 #------------------------------------------------------------------------------
