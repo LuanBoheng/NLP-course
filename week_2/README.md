@@ -1,4 +1,4 @@
-run **[corpus_processing.py](https://github.com/LuanBoheng/NLP-course/blob/master/week_2/corpus_processing.py)** will calclulate ngram frequency as binary files in **[data](https://github.com/LuanBoheng/NLP-course/tree/master/week_2/data)** based of the corpus in **[wiki_corpus](https://github.com/LuanBoheng/NLP-course/tree/master/wiki_corpus)**. and ipython notebook begin with **doc** are the documentations.
+run **[corpus_processing.py](https://github.com/LuanBoheng/NLP-course/blob/master/week_2/corpus_processing.py)** will calclulate ngram frequency as binary files in **[data](https://github.com/LuanBoheng/NLP-course/tree/master/week_2/data)** based of the corpus in **[wiki_corpus](https://github.com/LuanBoheng/NLP-course/tree/master/wiki_corpus)**. and ipython notebook begin with **_doc_** are the documentations.
 
 ```shell
 pypy3 corpus_processing.py
@@ -26,3 +26,14 @@ To start the eliza python program, please run following code in folder **eliza**
 python3 eliza.py
 ```
 
+
+
+about [_doc_linear_regression.ipynb](https://github.com/LuanBoheng/NLP-course/blob/master/week_2/_doc_linear_regression.ipynb) : two important question in machine learning.
+
+1. 是否可以学习
+   - 设置 baseline
+   - loss 有没有收敛
+
+2. 有没有学习
+
+   - loss 有没有下降
