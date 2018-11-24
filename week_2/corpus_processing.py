@@ -1,7 +1,7 @@
 # usd BFS search, return all corpus files as a list of string
 import os
 def get_corpus():
-    corpus_path = '../wiki_corpus/wiki_chs'
+    corpus_path = '/wiki_corpus/wiki_chs'
     corpus_list = []
     need_visit = [corpus_path]
     while need_visit:
