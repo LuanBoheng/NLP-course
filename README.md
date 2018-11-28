@@ -14,5 +14,15 @@
 
 ## week_3
 
+- draw graph via networkx
+- searching paradigm
+- best first search & beam search
+- A star search
 
+## Week_4
+
+- basic of Dynamic-Programming
+- python Decorators & recursive + cache
+- Rod Cutting Problem & Edit distance
+- VRP Problem
 
