@@ -10,7 +10,7 @@
 
 - Chinese corpus processing
 - ngram & ngram counter & Turing smoothing
-- eliza
+- eliza (syntax parser chat robot)
 
 ## week_3
 
