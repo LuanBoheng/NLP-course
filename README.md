@@ -29,6 +29,7 @@
 ## Week_5
 
 - use gensim train word2vec on wiki corpus
+- visualize word2vec
 
 ## Week_6
 
