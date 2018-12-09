@@ -26,3 +26,9 @@
 - Rod Cutting Problem & Edit distance
 - VRP Problem
 
+## Week_5
+
+- use gensim train word2vec on wiki corpus
+
+## Week_6
+
