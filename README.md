@@ -40,3 +40,5 @@
 - POS
 
 ## Project_1
+- The extraction of people's speech
+- viewpoint knowledge map
