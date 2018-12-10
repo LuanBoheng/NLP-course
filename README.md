@@ -29,7 +29,14 @@
 ## Week_5
 
 - use gensim train word2vec on wiki corpus
-- visualize word2vec
+- PCA visualize word2vec
 
 ## Week_6
 
+- TFIDF
+- word cloud
+- spread key words
+- NER
+- POS
+
+## Project_1
