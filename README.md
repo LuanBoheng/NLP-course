@@ -40,5 +40,6 @@
 - POS
 
 ## Project_1
+- start from week_6
 - The extraction of people's speech
 - viewpoint knowledge map
