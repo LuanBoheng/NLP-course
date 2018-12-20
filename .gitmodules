@@ -1,0 +1,3 @@
+[submodule "Chinese_segment_augment"]
+	path = Chinese_segment_augment
+	url = https://github.com/LuanBoheng/Chinese_segment_augment.git
